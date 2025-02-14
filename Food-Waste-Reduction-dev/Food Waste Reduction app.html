@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Waste Reduction App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-image: url('https://source.unsplash.com/1600x900/?food,vegetables');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        input, button {
+            margin: 10px;
+            padding: 10px;
+            width: 80%;
+        }
+        .recipes {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Food Waste Reduction App</h1>
+        <p>Enter food items near expiry:</p>
+        <input type="text" id="foodInput" placeholder="Enter ingredients">
+        <button onclick="getRecipes()">Get Recipes</button>
+        <div class="recipes" id="recipes"></div>
+    </div>
+
+    <script>
+        const recipeDatabase = [
+            { title: "Pasta with Tomato Sauce", ingredients: ["pasta", "tomato", "garlic"], time: "25 minutes", image: "https://via.placeholder.com/150" },
+            { title: "Banana Pancakes", ingredients: ["banana", "egg", "flour"], time: "15 minutes", image: "https://via.placeholder.com/150" },
+            { title: "Vegetable Stir Fry", ingredients: ["carrot", "pepper", "onion"], time: "20 minutes", image: "https://via.placeholder.com/150" },
+            { title: "Grilled Cheese Sandwich", ingredients: ["bread", "cheese", "butter"], time: "10 minutes", image: "https://via.placeholder.com/150" },
+            { title: "Omelette", ingredients: ["egg", "cheese", "pepper"], time: "10 minutes", image: "https://via.placeholder.com/150" },
+            { title: "Chicken Salad", ingredients: ["chicken", "lettuce", "tomato"], time: "15 minutes", image: "https://via.placeholder.com/150" },
+            { title: "Avocado Toast", ingredients: ["avocado", "bread", "egg"], time: "10 minutes", image: "https://via.placeholder.com/150" },
+            { title: "Fruit Smoothie", ingredients: ["banana", "strawberry", "milk"], time: "5 minutes", image: "https://via.placeholder.com/150" },
+            { title: "Garlic Butter Shrimp", ingredients: ["shrimp", "garlic", "butter"], time: "20 minutes", image: "https://via.placeholder.com/150" },
+            { title: "Chocolate Cake", ingredients: ["flour", "cocoa", "sugar"], time: "40 minutes", image: "https://via.placeholder.com/150" },
+            { title: "Ladies Finger Stir Fry", ingredients: ["ladies finger", "garlic", "onion", "oil", "spices"], time: "15 minutes", image: "https://via.placeholder.com/150" },
+            { title: "Mixed Vegetable Curry", ingredients: ["potato", "carrot", "peas", "tomato", "spices"], time: "35 minutes", image: "https://via.placeholder.com/150" },
+            { title: "Spinach Dal", ingredients: ["spinach", "lentils", "garlic", "onion", "spices"], time: "30 minutes", image: "https://via.placeholder.com/150" },
+            { title: "Stuffed Bell Peppers", ingredients: ["bell peppers", "rice", "tomato", "onion", "spices"], time: "40 minutes", image: "https://via.placeholder.com/150" },
+            { title: "Cabbage Stir Fry", ingredients: ["cabbage", "onion", "garlic", "spices"], time: "20 minutes", image: "https://via.placeholder.com/150" },
+            { title: "Brinjal Curry", ingredients: ["brinjal", "onion", "tomato", "spices"], time: "30 minutes", image: "https://via.placeholder.com/150" },
+            { title: "Pumpkin Soup", ingredients: ["pumpkin", "onion", "garlic", "cream"], time: "25 minutes", image: "https://via.placeholder.com/150" },
+            { title: "Mashed Potatoes", ingredients: ["potato", "butter", "milk", "salt"], time: "20 minutes", image: "https://via.placeholder.com/150" },
+            { title: "Potato Wedges", ingredients: ["potato", "oil", "salt", "spices"], time: "30 minutes", image: "https://via.placeholder.com/150" },
+            { title: "Aloo Gobi", ingredients: ["potato", "cauliflower", "tomato", "spices"], time: "35 minutes", image: "https://via.placeholder.com/150" },
+            { title: "Potato Soup", ingredients: ["potato", "onion", "garlic", "cream"], time: "30 minutes", image: "https://via.placeholder.com/150" }
+        ];
+
+        function getRecipes() {
+            const foodItems = document.getElementById('foodInput').value.trim().toLowerCase().split(',').map(item => item.trim());
+            
+            let matchedRecipes;
+            if (foodItems.length === 0 || foodItems[0] === "") {
+                matchedRecipes = recipeDatabase;
+            } else {
+                matchedRecipes = recipeDatabase.filter(recipe => 
+                    recipe.ingredients.some(ingredient => foodItems.includes(ingredient))
+                );
+            }
+            
+            displayRecipes(matchedRecipes);
+        }
+
+        function displayRecipes(recipes) {
+            const recipesDiv = document.getElementById('recipes');
+            recipesDiv.innerHTML = '';
+            
+            if (recipes.length === 0) {
+                recipesDiv.innerHTML = '<p>No recipes found. Try different ingredients.</p>';
+                return;
+            }
+            
+            recipes.forEach(recipe => {
+                const recipeElement = document.createElement('div');
+                recipeElement.innerHTML = `
+                    <p><strong>${recipe.title}</strong></p>
+                    <p><em>Time: ${recipe.time}</em></p>
+                    <img src="${recipe.image}" alt="${recipe.title}" width="100%">
+                `;
+                recipesDiv.appendChild(recipeElement);
+            });
+        }
+    </script>
+</body>
+</html>
