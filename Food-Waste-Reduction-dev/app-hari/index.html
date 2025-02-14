@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Waste Reduction App</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Food Waste Reduction App</h1>
+
+        <p>Enter food items near expiry (comma-separated):</p>
+        <input type="text" id="foodInput" placeholder="Enter ingredients">
+        <button onclick="getRecipes()">Get Recipes</button>
+
+        <p>Select a country to explore its cuisine:</p>
+        <select id="countrySelect">
+            <option value="">-- Select Country --</option>
+            <option value="american">American</option>
+            <option value="chinese">Chinese</option>
+            <option value="french">French</option>
+            <option value="indian">Indian</option>
+            <option value="italian">Italian</option>
+            <option value="japanese">Japanese</option>
+            <option value="mexican">Mexican</option>
+            <option value="spanish">Spanish</option>
+            <option value="thai">Thai</option>
+            <option value="turkish">Turkish</option>
+        </select>
+        <button onclick="getCuisineRecipes()">Get Cuisine Recipes</button>
+
+        <p>Click below to explore only vegetable recipes:</p>
+        <button onclick="getVegetableRecipes()">Get Vegetable Recipes</button>
+
+        <p>Click below to explore only non-vegetarian recipes:</p>
+        <button onclick="getNonVegetarianRecipes()">Get Non-Vegetarian Recipes</button>
+
+        <p>Feeling adventurous? Get a random recipe:</p>
+        <button onclick="getRandomRecipe()">Get Random Recipe</button>
+
+        <div class="recipes" id="recipes"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+</html>

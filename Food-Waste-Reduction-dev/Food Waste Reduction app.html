@@ -1,105 +1,151 @@
+HTML:
 <!DOCTYPE html>
+<html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Food Waste Reduction App</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            padding: 20px;
-            background-image: url('https://source.unsplash.com/1600x900/?food,vegetables');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-        .container {
-            max-width: 600px;
-            margin: auto;
-            text-align: center;
-            background: rgba(255, 255, 255, 0.8);
-            padding: 20px;
-            border-radius: 10px;
-        }
-        input, button {
-            margin: 10px;
-            padding: 10px;
-            width: 80%;
-        }
-        .recipes {
-            margin-top: 20px;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <h1>Food Waste Reduction App</h1>
-        <p>Enter food items near expiry:</p>
+        <p>Enter food items near expiry (comma-separated):</p>
         <input type="text" id="foodInput" placeholder="Enter ingredients">
+        
+        <p>Select a country:</p>
+        <select id="countrySelect">
+            <option value="">-- Select Country --</option>
+            <option value="american">American</option>
+            <option value="chinese">Chinese</option>
+            <option value="french">French</option>
+            <option value="indian">Indian</option>
+            <option value="italian">Italian</option>
+            <option value="japanese">Japanese</option>
+            <option value="mexican">Mexican</option>
+            <option value="spanish">Spanish</option>
+            <option value="thai">Thai</option>
+            <option value="turkish">Turkish</option>
+        </select>
+        
         <button onclick="getRecipes()">Get Recipes</button>
         <div class="recipes" id="recipes"></div>
     </div>
 
-    <script>
-        const recipeDatabase = [
-            { title: "Pasta with Tomato Sauce", ingredients: ["pasta", "tomato", "garlic"], time: "25 minutes", image: "https://via.placeholder.com/150" },
-            { title: "Banana Pancakes", ingredients: ["banana", "egg", "flour"], time: "15 minutes", image: "https://via.placeholder.com/150" },
-            { title: "Vegetable Stir Fry", ingredients: ["carrot", "pepper", "onion"], time: "20 minutes", image: "https://via.placeholder.com/150" },
-            { title: "Grilled Cheese Sandwich", ingredients: ["bread", "cheese", "butter"], time: "10 minutes", image: "https://via.placeholder.com/150" },
-            { title: "Omelette", ingredients: ["egg", "cheese", "pepper"], time: "10 minutes", image: "https://via.placeholder.com/150" },
-            { title: "Chicken Salad", ingredients: ["chicken", "lettuce", "tomato"], time: "15 minutes", image: "https://via.placeholder.com/150" },
-            { title: "Avocado Toast", ingredients: ["avocado", "bread", "egg"], time: "10 minutes", image: "https://via.placeholder.com/150" },
-            { title: "Fruit Smoothie", ingredients: ["banana", "strawberry", "milk"], time: "5 minutes", image: "https://via.placeholder.com/150" },
-            { title: "Garlic Butter Shrimp", ingredients: ["shrimp", "garlic", "butter"], time: "20 minutes", image: "https://via.placeholder.com/150" },
-            { title: "Chocolate Cake", ingredients: ["flour", "cocoa", "sugar"], time: "40 minutes", image: "https://via.placeholder.com/150" },
-            { title: "Ladies Finger Stir Fry", ingredients: ["ladies finger", "garlic", "onion", "oil", "spices"], time: "15 minutes", image: "https://via.placeholder.com/150" },
-            { title: "Mixed Vegetable Curry", ingredients: ["potato", "carrot", "peas", "tomato", "spices"], time: "35 minutes", image: "https://via.placeholder.com/150" },
-            { title: "Spinach Dal", ingredients: ["spinach", "lentils", "garlic", "onion", "spices"], time: "30 minutes", image: "https://via.placeholder.com/150" },
-            { title: "Stuffed Bell Peppers", ingredients: ["bell peppers", "rice", "tomato", "onion", "spices"], time: "40 minutes", image: "https://via.placeholder.com/150" },
-            { title: "Cabbage Stir Fry", ingredients: ["cabbage", "onion", "garlic", "spices"], time: "20 minutes", image: "https://via.placeholder.com/150" },
-            { title: "Brinjal Curry", ingredients: ["brinjal", "onion", "tomato", "spices"], time: "30 minutes", image: "https://via.placeholder.com/150" },
-            { title: "Pumpkin Soup", ingredients: ["pumpkin", "onion", "garlic", "cream"], time: "25 minutes", image: "https://via.placeholder.com/150" },
-            { title: "Mashed Potatoes", ingredients: ["potato", "butter", "milk", "salt"], time: "20 minutes", image: "https://via.placeholder.com/150" },
-            { title: "Potato Wedges", ingredients: ["potato", "oil", "salt", "spices"], time: "30 minutes", image: "https://via.placeholder.com/150" },
-            { title: "Aloo Gobi", ingredients: ["potato", "cauliflower", "tomato", "spices"], time: "35 minutes", image: "https://via.placeholder.com/150" },
-            { title: "Potato Soup", ingredients: ["potato", "onion", "garlic", "cream"], time: "30 minutes", image: "https://via.placeholder.com/150" }
-        ];
-
-        function getRecipes() {
-            const foodItems = document.getElementById('foodInput').value.trim().toLowerCase().split(',').map(item => item.trim());
-            
-            let matchedRecipes;
-            if (foodItems.length === 0 || foodItems[0] === "") {
-                matchedRecipes = recipeDatabase;
-            } else {
-                matchedRecipes = recipeDatabase.filter(recipe => 
-                    recipe.ingredients.some(ingredient => foodItems.includes(ingredient))
-                );
-            }
-            
-            displayRecipes(matchedRecipes);
-        }
-
-        function displayRecipes(recipes) {
-            const recipesDiv = document.getElementById('recipes');
-            recipesDiv.innerHTML = '';
-            
-            if (recipes.length === 0) {
-                recipesDiv.innerHTML = '<p>No recipes found. Try different ingredients.</p>';
-                return;
-            }
-            
-            recipes.forEach(recipe => {
-                const recipeElement = document.createElement('div');
-                recipeElement.innerHTML = `
-                    <p><strong>${recipe.title}</strong></p>
-                    <p><em>Time: ${recipe.time}</em></p>
-                    <img src="${recipe.image}" alt="${recipe.title}" width="100%">
-                `;
-                recipesDiv.appendChild(recipeElement);
-            });
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
+</html>
+
+CSS:
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 20px;
+    background-image: url('https://source.unsplash.com/1600x900/?food,healthy');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.container {
+    max-width: 600px;
+    margin: auto;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+input, button {
+    margin: 10px;
+    padding: 10px;
+    width: 80%;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+button {
+    background-color: green;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: darkgreen;
+}
+
+.recipes {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+}
+
+.recipe-card {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    width: 250px;
+    text-align: center;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.recipe-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+JAVASCRIPT
+
+const API_KEY = "4c137389c1ea478e9c1383eda254250e";
+
+async function getRecipes() {
+    const foodInput = document.getElementById("foodInput").value.trim().toLowerCase();
+    
+    if (!foodInput) {
+        document.getElementById("recipes").innerHTML = "<p>Please enter at least one ingredient.</p>";
+        return;
+    }
+
+    const apiUrl = `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${foodInput}&number=10&apiKey=${API_KEY}`;
+
+    try {
+        const response = await fetch(apiUrl);
+        const recipes = await response.json();
+        
+        if (recipes.length === 0) {
+            document.getElementById("recipes").innerHTML = "<p>No recipes found. Try different ingredients.</p>";
+            return;
+        }
+
+        displayRecipes(recipes);
+    } catch (error) {
+        console.error("Error fetching recipes:", error);
+        document.getElementById("recipes").innerHTML = "<p>Failed to fetch recipes. Please try again later.</p>";
+    }
+}
+
+function displayRecipes(recipes) {
+    const recipesDiv = document.getElementById("recipes");
+    recipesDiv.innerHTML = "";
+
+    recipes.forEach(recipe => {
+        const recipeElement = document.createElement("div");
+        recipeElement.classList.add("recipe-card");
+        recipeElement.innerHTML = `
+            <img src="${recipe.image}" alt="${recipe.title}">
+            <h3>${recipe.title}</h3>
+            <p><strong>Used Ingredients:</strong> ${recipe.usedIngredientCount}</p>
+            <p><strong>Missing Ingredients:</strong> ${recipe.missedIngredientCount}</p>
+            <a href="https://spoonacular.com/recipes/${recipe.title.replace(/ /g, "-")}-${recipe.id}" target="_blank">View Recipe</a>
+        `;
+        recipesDiv.appendChild(recipeElement);
+    });
+}
