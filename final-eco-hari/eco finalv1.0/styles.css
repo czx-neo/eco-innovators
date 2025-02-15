@@ -1,0 +1,243 @@
+/* General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background-image: url('https://images.unsplash.com/photo-1566385101042-1a0aa0c1268c?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+    color: #333;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 800px;
+    width: 90%;
+    overflow-y: auto;
+    max-height: 90vh;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-mode .container {
+    background: rgba(18, 18, 18, 0.9);
+    color: #e0e0e0;
+}
+
+.logo {
+    font-family: 'Roboto', sans-serif; /* Changed font to Roboto */
+    font-size: 3rem;
+    color: #000000; /* Default color is black */
+    margin-bottom: 10px;
+    transition: color 0.3s; /* Smooth transition for color change */
+}
+
+body.dark-mode .logo {
+    color: #ffffff; /* Change to white in dark mode */
+}
+
+.tagline {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+body.dark-mode .tagline {
+    color: #b0b0b0;
+}
+
+.search-section {
+    margin-bottom: 25px;
+}
+
+input, select, button {
+    margin: 10px 0;
+    padding: 12px;
+    width: 90%;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+body.dark-mode input, body.dark-mode select, body.dark-mode button {
+    background-color: #333;
+    color: #e0e0e0;
+    border-color: #555;
+}
+
+input:focus, select:focus, button:focus {
+    outline: none;
+    border-color: #2ecc71;
+    box-shadow: 0 0 5px rgba(46, 204, 113, 0.5);
+}
+
+button {
+    background-color: #2ecc71;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    border: none;
+}
+
+button:hover {
+    background-color: #27ae60;
+}
+
+.btn-secondary {
+    background-color: #3498db;
+    margin: 5px;
+    width: 45%;
+}
+
+.btn-secondary:hover {
+    background-color: #2980b9;
+}
+
+.btn-dark {
+    background-color: #555;
+    color: white;
+    margin: 10px;
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-dark:hover {
+    background-color: #444;
+}
+
+.recipes {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.recipe-card {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    width: 250px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+body.dark-mode .recipe-card {
+    background: #333;
+    color: #e0e0e0;
+}
+
+.recipe-card:hover {
+    transform: translateY(-5px);
+}
+
+.recipe-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.recipe-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: #2ecc71;
+}
+
+.recipe-card p {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+body.dark-mode .recipe-card p {
+    color: #b0b0b0;
+}
+
+.recipe-card a {
+    text-decoration: none;
+    color: #3498db;
+    font-weight: bold;
+}
+
+.recipe-card a:hover {
+    text-decoration: underline;
+}
+
+.placeholder-text {
+    color: #888;
+    font-style: italic;
+}
+
+body.dark-mode .placeholder-text {
+    color: #777;
+}
+
+.error-message {
+    color: #ff4444;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+body.dark-mode .error-message {
+    color: #ff6666;
+}
+
+/* Loading Spinner */
+.loading-spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #2ecc71;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Scroll-up button */
+.scroll-up-btn {
+    display: none; /* Hidden by default */
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 99;
+    border: none;
+    outline: none;
+    background-color: #2ecc71;
+    color: white;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 50%;
+    font-size: 18px;
+    transition: background-color 0.3s;
+}
+
+.scroll-up-btn:hover {
+    background-color: #27ae60;
+}
