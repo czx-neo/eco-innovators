@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Waste Reduction App</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="dark-mode-toggle">
+            <button id="darkModeToggle" class="btn-dark">
+                <i class="fas fa-moon"></i> Dark Mode
+            </button>
+        </div>
+        <h1 class="logo">Eco-Eatzz</h1>
+        <p class="tagline">Reduce Food Waste, One Recipe at a Time</p>
+
+        <div class="search-section">
+            <p>Enter food items near expiry (comma-separated):</p>
+            <input type="text" id="foodInput" placeholder="e.g., tomatoes, chicken, spinach">
+            <button onclick="getRecipes()" class="btn-primary">
+                <i class="fas fa-search"></i> Get Recipes
+            </button>
+        </div>
+
+        <div class="search-section">
+            <p>Select a country to explore its cuisine:</p>
+            <select id="countrySelect">
+                <option value="">-- Select Country --</option>
+                <option value="american">American</option>
+                <option value="chinese">Chinese</option>
+                <option value="french">French</option>
+                <option value="indian">Indian</option>
+                <option value="italian">Italian</option>
+                <option value="japanese">Japanese</option>
+                <option value="mexican">Mexican</option>
+                <option value="spanish">Spanish</option>
+                <option value="thai">Thai</option>
+                <option value="turkish">Turkish</option>
+            </select>
+            <button onclick="getCuisineRecipes()" class="btn-primary">
+                <i class="fas fa-globe"></i> Get Cuisine Recipes
+            </button>
+        </div>
+
+        <div class="search-section">
+            <p>Explore specific diet options:</p>
+            <button onclick="getVegetarianRecipes()" class="btn-secondary">
+                <i class="fas fa-leaf"></i> Vegetarian Recipes
+            </button>
+            <button onclick="getNonVegetarianRecipes()" class="btn-secondary">
+                <i class="fas fa-drumstick-bite"></i> Non-Vegetarian Recipes
+            </button>
+        </div>
+
+        <div class="search-section">
+            <p>Feeling adventurous? Get a random recipe:</p>
+            <button onclick="getRandomRecipe()" class="btn-primary">
+                <i class="fas fa-random"></i> Get Random Recipe
+            </button>
+        </div>
+
+        <div class="recipes" id="recipes">
+            <p class="placeholder-text">Your recipes will appear here...</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
